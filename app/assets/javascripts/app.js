@@ -11,8 +11,12 @@ function($scope){
 		];
 
 	$scope.addPost = function(){
-			$scope.posts.push({title: $scope.title, votes: 1})
+			$scope.posts.push({
+				title: $scope.title, 
+				link: $scope.link,
+				votes: 1})
 			$scope.title ='';
+			$scope.link ='';
 		};
 
 	$scope.removePost = function(){

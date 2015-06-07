@@ -1,6 +1,8 @@
 <HTML>
 
 <head>
+<title>Roger News</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
      <%= javascript_include_tag 'application' %>
 </head>
@@ -17,21 +19,28 @@
 		</div>
 
 		<div ng-repeat="post in posts | orderBy: '-votes'">
-		<button ng-click="incrementUpvotes(post)">^</button>
-		    {{post.title}} <b># of votes:</b> {{post.votes}}
+		<button ng-click="incrementUpvotes(post)" class= "btn btn-success">^<i class="icon-shopping-cart icon-white"></i></button> 
+		<a ng-show="post.link" href = "{{post.link}}" target = "_blank">
+		  {{post.title}}
+		</a>
+		<span ng-hide="post.link">
+		  {{post.title}}
+		</span>
+		<b># of votes:</b> {{post.votes}}
 		</div>
 
 		<h2>Want to add your own post?</h2>
 
 		<form ng-submit = "addPost()" name="add">
-		  <input name ="blank" type = "text" ng-model ="title" ng-minlength ="1" required>
+		  <span>Title:</span><input name ="blank" type = "text" ng-model ="title" ng-minlength ="1" required>
+		  		<span ng-show="add.blank.$error.required">Please enter a title!</span>
+		  		<span ng-show="!add.blank.$error.required">You're good</span>
 		  <br/>
-		  <span ng-show="add.blank.$error.required">Please enter a title!</span>
-		  <span ng-show="!add.blank.$error.required">
-		  You're good</span>
+		  <span>Link:</span>
+		  <input type="text" ng-model="link">
 		  <br/>
 		  <button type="submit">Post</button>
-		 </form>
+		</form>
 
 		  <br/>
 		  <br/>  
